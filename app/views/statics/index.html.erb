@@ -5,9 +5,11 @@
 <% end %> -->
 
 <% @posts.each do |post| %>
-<div style="height:50px">  
+<div style="height:50px"> 
+  <%= image_tag(post.avatar.url)  %>
   <%= post.name %>
   <br>
+  <%= post.content %>
 </div>
 <% end %>
 <%= paginate @posts %>

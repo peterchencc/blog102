@@ -9,6 +9,12 @@
     <%= f.label :content %><br>
     <%= f.text_field :content %>
   </div>
+  <div class="form-inputs">
+    <label>Posts Photo</label>
+    <%= image_tag(@admin_post.avatar_url) if @admin_post.avatar? %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

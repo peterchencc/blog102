@@ -33,7 +33,8 @@ class Admin::PostsController < AdminController
 
   def update
     @admin_post.update(admin_post_params)
-    respond_with(@admin_post)
+    redirect_to :action => :index
+    # respond_with(@admin_post)
   end
 
   def destroy
@@ -47,6 +48,6 @@ class Admin::PostsController < AdminController
     end
 
     def admin_post_params
-      params.require(:admin_post).permit(:name, :content)
+      params.require(:admin_post).permit(:name, :content, :avatar)
     end
 end
