@@ -1,0 +1,7 @@
+<% @posts.each do |post| %>
+<div style="height:50px">  
+  <%= post.name %>
+  <br>
+</div>
+<% end %>
+<%= paginate @posts %>

@@ -1,6 +1,13 @@
-<p>hello blog102</p>
+
+<%= form_tag posts_path, :method => :get do %>
+    <%= text_field_tag "keyword" %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <% @posts.each do |post| %>
+<div style="height:50px">  
   <%= post.name %>
-
+  <br>
+</div>
 <% end %>
+<%= paginate @posts %>
