@@ -4,7 +4,7 @@ class Admin::PostsController < AdminController
   respond_to :html
 
   def index
-    @admin_posts = Admin::Post.all
+    @admin_posts = Admin::Post.page(params[:page]).per(5)
     respond_with(@admin_posts)
   end
 
@@ -22,8 +22,13 @@ class Admin::PostsController < AdminController
 
   def create
     @admin_post = Admin::Post.new(admin_post_params)
-    @admin_post.save
-    respond_with(@admin_post)
+    if @admin_post.save
+      redirect_to :action => :index
+    else
+      render :action => :new
+    end
+    # @admin_post.save
+    # respond_with(@admin_post)
   end
 
   def update
