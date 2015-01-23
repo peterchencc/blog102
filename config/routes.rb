@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  root 'statics#index'
 
+
+  devise_for :admins
+  root 'statics#index'
+  
+  namespace :admin do
+    resources :posts
+    authenticated :admin do
+      root "posts#index"
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
