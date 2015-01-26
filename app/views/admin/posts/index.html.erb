@@ -1,8 +1,9 @@
+
+<h2>文章列表</h2>
+<div><%= link_to 'New Post', new_admin_post_path %></div>
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Admin Posts</h1>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<div>
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
   <tbody id="listpost">
     <% @admin_posts.each do |admin_post| %>
       <tr <%= "id=reorderPostContainer_#{admin_post.id.to_s}" %>>
@@ -19,14 +20,15 @@
     <% end %>
   </tbody>
 </table>
-
-
-<br>
-
-<%= link_to 'New Post', new_admin_post_path %>
-
 <%= paginate @admin_posts %>
+</div>
+
+
+
+
 <script>
+
+// <!-- multiple_reorder -->
 $(function() {
       var prevEvent = null;
         $( "#listpost" ).sortable({
@@ -75,5 +77,5 @@ $(function() {
           
         $( "#listPost" ).disableSelection();
       }); 
-
+// <!-- multiple_reorder -->
 </script>
