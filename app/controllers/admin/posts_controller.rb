@@ -42,12 +42,34 @@ class Admin::PostsController < AdminController
     respond_with(@admin_post)
   end
 
-  private
-    def set_admin_post
-      @admin_post = Admin::Post.find(params[:id])
+  #multiReorder
+  def multiple_reorder
+    errorFlag = false
+    params[:post][:reorderset].each_with_index do | postid , index |
+      @admin_post = Post.find(postid)
+      if !@admin_post.nil?
+        @admin_post.update_attribute(:ranking , index+1 )
+      else
+        errorFlag = true
+      end
     end
 
-    def admin_post_params
-      params.require(:admin_post).permit(:name, :content, :avatar)
+    respond_to do |format|
+      if errorFlag
+        format.json { head :no_content }
+      else
+        format.json { head :no_content }
+      end
     end
+  end
+
+
+  private
+  def set_admin_post
+    @admin_post = Admin::Post.find(params[:id])
+  end
+
+  def admin_post_params
+    params.require(:admin_post).permit(:name, :content, :avatar)
+  end
 end

@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
 
   resources :posts
-  
+
   devise_for :admins
   root 'posts#index'
-  
+
   namespace :admin do
-    resources :posts
+    resources :posts do
+      member do
+        patch 'multiple_reorder' , :action => 'multiple_reorder'
+      end
+    end
+    
     authenticated :admin do
       root "posts#index"
     end

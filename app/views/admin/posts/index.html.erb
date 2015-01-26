@@ -3,9 +3,9 @@
 <h1>Listing Admin Posts</h1>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
+  <tbody id="listpost">
     <% @admin_posts.each do |admin_post| %>
-      <tr>
+      <tr <%= "id=reorderPostContainer_#{admin_post.id.to_s}" %>>
         <td width="20%"><%= admin_post.name %></td>
         <td width="30%"><%= admin_post.content %></td>
         <td width="15%"><%= admin_post.created_at.to_s(:long) %></td>
@@ -13,7 +13,7 @@
         
         
         <!-- <td width="5%"><%= link_to 'Show', admin_post %></td> -->
-        <td width="5%"><%= link_to '編輯 ', edit_admin_post_path(admin_post) %></td>
+        <td width="5%"><%= link_to '編輯', edit_admin_post_path(admin_post) %></td>
         <td width="5%"><%= link_to '刪除', admin_post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -26,3 +26,54 @@
 <%= link_to 'New Post', new_admin_post_path %>
 
 <%= paginate @admin_posts %>
+<script>
+$(function() {
+      var prevEvent = null;
+        $( "#listpost" ).sortable({
+            placeholder: "ui-state-highlight",
+              update: function( event, ui ) {
+              
+                if(event.timeStamp == prevEvent){
+                  return null;
+                }
+              
+                prevEvent = event.timeStamp;  
+                var newRankings_array = $('#listpost').sortable('toArray');
+                
+                var orderSet = [];
+                $.each(newRankings_array, function( index, value){
+                  orderSet.push(value.replace("reorderPostContainer_",""));
+                });
+                var order2Push = JSON.stringify(orderSet);
+                
+                $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                  }
+                });
+
+                //multiple reorder 
+                $.ajax({
+                  type: "PATCH",
+                  url: "/admin/posts/"+orderSet[0]+"/multiple_reorder",
+                  data: { post: {  reorderset: orderSet } },
+                  success: function(data){
+                 //alert ("success");
+                    //console.log("================ brproducts reorder PATCH successfully end =============");
+                    return false   
+                  },
+                  error: function(data){
+                  //alert ("faild");
+                    //console.log("================ brproducts reorder has some issues ==================");
+                    return false  
+                  }
+                });
+
+              }
+        });
+        
+          
+        $( "#listPost" ).disableSelection();
+      }); 
+
+</script>
