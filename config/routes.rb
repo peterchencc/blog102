@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :posts
   
   devise_for :admins
-  root 'statics#index'
+  root 'posts#index'
   
   namespace :admin do
     resources :posts
