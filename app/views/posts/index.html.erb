@@ -1,12 +1,14 @@
 <% @posts.each do |post| %>
 <div style="border:1px;border-color:black;border-style:solid;">
 <a href="<%= post_url(post) %>">
-  <div><%= image_tag(post.avatar.url) %></div>
+  <div><%= image_tag(post.avatar.url) %></div></a> 
   <div>  
-    <p><strong><%= post.name %></strong></p>
-    <%= post.content %>
+    <h3><%= post.name %></h3>
+    <!-- <div><%= raw(post.content) %></div> -->
+    <div><%= post.content.html_safe %></div>
+    
   </div>
-</a> 
+
 </div>
 <% end %>
 <%= paginate @posts %>

@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery-ui/sortable
-
 //= require turbolinks
+//= require ckeditor/init

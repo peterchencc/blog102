@@ -29,53 +29,53 @@
 <script>
 
 // <!-- multiple_reorder -->
-$(function() {
-      var prevEvent = null;
-        $( "#listpost" ).sortable({
-            placeholder: "ui-state-highlight",
-              update: function( event, ui ) {
+// $(function() {
+//       var prevEvent = null;
+//         $( "#listpost" ).sortable({
+//             placeholder: "ui-state-highlight",
+//               update: function( event, ui ) {
               
-                if(event.timeStamp == prevEvent){
-                  return null;
-                }
+//                 if(event.timeStamp == prevEvent){
+//                   return null;
+//                 }
               
-                prevEvent = event.timeStamp;  
-                var newRankings_array = $('#listpost').sortable('toArray');
+//                 prevEvent = event.timeStamp;  
+//                 var newRankings_array = $('#listpost').sortable('toArray');
                 
-                var orderSet = [];
-                $.each(newRankings_array, function( index, value){
-                  orderSet.push(value.replace("reorderPostContainer_",""));
-                });
-                var order2Push = JSON.stringify(orderSet);
+//                 var orderSet = [];
+//                 $.each(newRankings_array, function( index, value){
+//                   orderSet.push(value.replace("reorderPostContainer_",""));
+//                 });
+//                 var order2Push = JSON.stringify(orderSet);
                 
-                $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                  }
-                });
+//                 $.ajaxSetup({
+//                   headers: {
+//                       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+//                   }
+//                 });
 
-                //multiple reorder 
-                $.ajax({
-                  type: "PATCH",
-                  url: "/admin/posts/"+orderSet[0]+"/multiple_reorder",
-                  data: { post: {  reorderset: orderSet } },
-                  success: function(data){
-                 //alert ("success");
-                    //console.log("================ brproducts reorder PATCH successfully end =============");
-                    return false   
-                  },
-                  error: function(data){
-                  //alert ("faild");
-                    //console.log("================ brproducts reorder has some issues ==================");
-                    return false  
-                  }
-                });
+//                 //multiple reorder 
+//                 $.ajax({
+//                   type: "PATCH",
+//                   url: "/admin/posts/"+orderSet[0]+"/multiple_reorder",
+//                   data: { post: {  reorderset: orderSet } },
+//                   success: function(data){
+//                  //alert ("success");
+//                     //console.log("================ brproducts reorder PATCH successfully end =============");
+//                     return false   
+//                   },
+//                   error: function(data){
+//                   //alert ("faild");
+//                     //console.log("================ brproducts reorder has some issues ==================");
+//                     return false  
+//                   }
+//                 });
 
-              }
-        });
+//               }
+//         });
         
           
-        $( "#listPost" ).disableSelection();
-      }); 
+//         $( "#listPost" ).disableSelection();
+//       }); 
 // <!-- multiple_reorder -->
 </script>

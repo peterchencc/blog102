@@ -1,5 +1,5 @@
   <div><%= image_tag(@post.avatar.url) %></div>
   <div>  
-    <p><strong><%= @post.name %></strong></p>
-    <%= @post.content %>
+    <h3><%= @post.name %></h3>
+    <%= @post.content.html_safe %>
   </div>

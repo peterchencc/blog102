@@ -6,8 +6,9 @@
     <%= f.text_field :name %>
   </div>
   <div class="form-inputs">
-    <%= f.label :content %><br>
-    <%= f.text_field :content %>
+    <%#= f.label :content %><br>
+    <%= f.input :content, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'} } %>
+    <%#= f.text_field :content %>
   </div>
   <div class="form-inputs">
     <label>Posts Photo</label>
