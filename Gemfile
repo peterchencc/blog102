@@ -56,5 +56,5 @@ gem "paperclip"
 gem 'carrierwave'
 gem "mini_magick"
 gem 'friendly_id', '~> 5.1.0'
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
